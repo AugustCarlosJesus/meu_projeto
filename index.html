@@ -18,10 +18,10 @@
 <script id="t2q1v8">
   setInterval(() => {
     location.reload();
-  }, 30000); // atualiza a cada 30 segundos
+  }, 60000); // atualiza a cada 30 segundos
 </script>
 <script>
-let tempo = 30; // tempo em segundos
+let tempo = 60; // tempo em segundos
 
 function atualizarContador() {
   const contador = document.getElementById("contador");
@@ -31,7 +31,7 @@ function atualizarContador() {
 
   if (tempo < 0) {
     atualizarDados();
-    tempo = 30; // reinicia o contador
+    tempo = 60; // reinicia o contador
   }
 }
 
