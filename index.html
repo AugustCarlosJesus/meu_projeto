@@ -9,6 +9,8 @@
     
 </body>
 <H1>MEU SISTEMA</H1>
+<div id="contador">Atualizando em: 30s</div>
+<div id="status">Carregando...</div>
 <P>ATUALIZADO AS 10:40</P>
 <p>Nome do responsavel - CARLOS AUGUSTO </p>
 <p>Pendente de saida - 25 rotas </p>
@@ -18,4 +20,49 @@
     location.reload();
   }, 30000); // atualiza a cada 30 segundos
 </script>
+<script>
+let tempo = 30; // tempo em segundos
+
+function atualizarContador() {
+  const contador = document.getElementById("contador");
+  contador.innerText = "Atualizando em: " + tempo + "s";
+
+  tempo--;
+
+  if (tempo < 0) {
+    atualizarDados();
+    tempo = 30; // reinicia o contador
+  }
+}
+
+function atualizarDados() {
+  fetch('dados.json?cache=' + new Date().getTime())
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('status').innerText = data.status;
+    })
+    .catch(() => {
+      document.getElementById('status').innerText = "Erro ao atualizar";
+    });
+}
+
+// roda a cada 1 segundo
+setInterval(atualizarContador, 1000);
+
+// roda uma vez ao iniciar
+atualizarDados();
+</script>
+<style>
+#contador {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#status {
+  font-size: 22px;
+  color: green;
+}
+</style>
 </html>
